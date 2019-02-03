@@ -1,0 +1,405 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+
+  <meta charset="UTF-8">
+  
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/10.0.0/nouislider.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+
+      <style>
+      .hero {
+  padding-top: 45px;
+  padding-bottom: 90px;
+}
+.hero__heading {
+  margin-top: 0;
+  margin-bottom: 30px;
+  color: #ffffff;
+  font-weight: 400;
+  text-align: center;
+}
+
+.overlay-box {
+  padding: 15px;
+  background-color:#a94442;
+  background-color: #a94442;
+}
+@media (min-width: 786px) {
+  .overlay-box {
+    padding: 45px;
+  }
+}
+
+.calculator__group {
+  margin-bottom: 60px;
+}
+.calculator__group--range {
+  margin-bottom: 90px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+@media (min-width: 992px) {
+  .calculator__group--range {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+.calculator__heading {
+  margin-top: 0;
+  margin-bottom: 30px;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.range__amount {
+  display: inline-block;
+  float: right;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.noUi-horizontal {
+  height: 5px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.noUi-horizontal .noUi-handle {
+  width: 15px;
+  height: 15px;
+  border: 0;
+  border-radius: 50%;
+  box-shadow: none;
+  top: -5.5px;
+  left: -7.5px;
+  background-color: rgb(101, 243, 7);
+}
+.noUi-horizontal .noUi-handle:before, .noUi-horizontal .noUi-handle:after {
+  display: none;
+}
+
+.noUi-connect {
+  background-color: rgb(243, 19, 19);
+}
+
+.noUi-value-horizontal {
+  color: #ffffff;
+  -webkit-transform: translate3d(-50%, 65%, 0);
+          transform: translate3d(-50%, 65%, 0);
+}
+
+.hc-radio {
+  height: 45px;
+  position: relative;
+  background-color: transparent;
+}
+.hc-radio__input {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.hc-radio__label {
+  display: block;
+  margin-bottom: 0;
+  position: absolute;
+  z-index: 90;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  color: #ffffff;
+  font-size: 15px;
+  cursor: pointer;
+}
+@media (min-width: 768px) {
+  .hc-radio--center {
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+@media (min-width: 768px) {
+  .hc-radio--right {
+    float: right;
+  }
+}
+.hc-radio--check {
+  width: 150px;
+}
+.hc-radio--check .hc-radio__label {
+  padding-left: 45px;
+  line-height: 45px;
+}
+.hc-radio--check .hc-radio__label-mark {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #ffffff;
+  position: absolute;
+  top: 10px;
+  left: 0;
+}
+.hc-radio--check .hc-radio__input:checked + .hc-radio__label .hc-radio__label-mark {
+  background-color: rgb(250, 94, 3);
+}
+.hc-radio--check .hc-radio__input:checked + .hc-radio__label .hc-radio__label-mark:before {
+  width: 16px;
+  height: 8px;
+  position: absolute;
+  top: 5px;
+  left: 4px;
+  content: '';
+  background: transparent;
+  border: 3px solid #fcfff4;
+  border-top: none;
+  border-right: none;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+.hc-radio--button {
+  margin-bottom: 15px;
+}
+.hc-radio--button .hc-radio__label {
+  border: 2px solid #ffffff;
+  text-align: center;
+  line-height: 40px;
+}
+.hc-radio--button .hc-radio__input:checked + .hc-radio__label {
+  color: #ffffff;
+  background-color: rgb(47, 157, 207);
+}
+
+.payment-amount {
+  padding: 15px;
+  text-align: center;
+  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.75);
+}
+.payment-amount__heading {
+  margin-top: 0;
+  font-size: 20px;
+}
+.payment-amount__output {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+    </style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+<body translate="no" >
+
+  <div class="hero">
+  <div class="container">
+    
+    <div class="overlay-box">
+      <div class="calculator">
+        <div class="calculator__group calculator__group--range">
+          <div class="range">
+            <h2 class="calculator__heading" style="text-align: center;">Select the amount: <span id="range-amount" class="range__amount"></span></h2>
+            <div id="range-slider" class="range__slider"></div>
+          </div>
+        </div>
+        <div class="calculator__group">
+          <div class="row">
+            <div class="col-xs-12">
+              <h2 class="calculator__heading" style="text-align: center;">options:</h2>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-sm-4">
+              <div class="hc-radio hc-radio--check">
+                <input id="twelve-months" class="hc-radio__input" name="number-of-years" type="radio" value="12" />
+                <label class="hc-radio__label" for="twelve-months"><span class="hc-radio__label-mark"></span>12 months</label>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="hc-radio hc-radio--check hc-radio--center">
+                <input id="eighteen-months" class="hc-radio__input" name="number-of-years" type="radio" value="18" checked="checked" />
+                <label class="hc-radio__label" for="eighteen-months"><span class="hc-radio__label-mark"></span>18 months</label>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="hc-radio hc-radio--check hc-radio--right">
+                <input id="twenty-four-months" class="hc-radio__input" name="number-of-years" type="radio" value="24" />
+                <label class="hc-radio__label" for="twenty-four-months"><span class="hc-radio__label-mark"></span>24 months</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="calculator__group">
+          <div class="row">
+            <div class="col-xs-12">
+              <h2 class="calculator__heading" style="text-align: center;"> frequency:</h2>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-sm-6">
+              <div class="hc-radio hc-radio--button">
+                <input id="weekly" class="hc-radio__input" name="payments-per-year" type="radio" value="52" checked="checked" />
+                <label class="hc-radio__label" for="weekly">Weekly</label>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="hc-radio hc-radio--button">
+                <input id="monthly" class="hc-radio__input" name="payments-per-year" type="radio" value="12" />
+                <label class="hc-radio__label" for="monthly">Monthly</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="payment-amount">
+          <h2 class="payment-amount__heading"><span id="payment-frequency-text"></span> Payment Amount<sup>*</sup>:</h2>
+          <span class="payment-amount__output" id="payment-amount-output"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+   
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/10.0.0/nouislider.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js'></script>
+
+  
+
+    <script >
+      (function () {
+
+  var rangeSlider = document.getElementById('range-slider');
+  var rangeAmount = document.getElementById('range-amount');
+  var paymentAmountEl = document.getElementById('payment-amount-output');
+  var repaymentEls = document.querySelectorAll('input[type="radio"]');
+
+  var moneyFormat = wNumb({
+    prefix: '$',
+    thousand: ',',
+    mark: '.',
+    decimals: 2 });
+
+
+  var moneyFormatNoDecimals = wNumb({
+    prefix: '$',
+    thousand: ',',
+    decimals: 0 });
+
+
+  var sliderOptions = {
+    start: [2400],
+    step: 100,
+    range: {
+      min: [500],
+      max: [5000] },
+
+    pips: {
+      mode: 'range',
+      density: 100,
+      format: moneyFormatNoDecimals },
+
+    format: moneyFormat,
+    behaviour: 'snap',
+    connect: [true, false] };
+
+
+  var interestRate = .33;
+
+  function setLoanAmount() {
+    var loanAmount = getLoanAmount();
+    rangeAmount.textContent = moneyFormatNoDecimals.to(loanAmount);
+  }
+
+  function setPaymentAmount() {
+    var paymentAmount = getPaymentAmount(getLoanAmount(), getNumberOfYears(), getPaymentsPerYear());
+    paymentAmountEl.textContent = moneyFormat.to(paymentAmount);
+  }
+
+  function getPaymentAmount(loanAmount, numberOfYears, paymentsPerYear) {
+    var n = numberOfYears * paymentsPerYear;
+    var i = interestRate / paymentsPerYear;
+    var A = loanAmount;
+    var D = (Math.pow(1 + i, n) - 1) / (i * Math.pow(1 + i, n));
+    return A / D;
+  }
+
+  function getLoanAmount() {
+    var loanAmount = Number(rangeSlider.noUiSlider.get().replace(/\$|,/g, ''));
+    return isNaN(loanAmount) ? 0 : loanAmount;
+  }
+function getApicalc(loanAmount,numberOfYears,paymentsPerYear){
+  var request = new XMLHttpRequest();
+
+// Open a new connection, using the GET request on the URL endpoint
+request.open('GET', 'https://ftl-frontend-test.herokuapp.com/interest?amount=&lt;loanAmount&gt;&amp;numMonths=&lt;numberOfYears&gt;', true);
+
+request.onload = function () {
+  // Begin accessing JSON data here
+  }
+  // Send request
+request.send();
+  
+
+}
+
+
+
+  function getNumberOfYears() {
+    var repaymentTerm = Number(document.querySelector('input[name="number-of-years"]:checked').value);
+    return isNaN(repaymentTerm) ? 0 : repaymentTerm / 12;
+  }
+
+  function getPaymentsPerYear() {
+    var repaymentFrequency = Number(document.querySelector('input[name="payments-per-year"]:checked').value);
+    return isNaN(repaymentFrequency) ? 0 : repaymentFrequency;
+  }
+
+  noUiSlider.create(rangeSlider, sliderOptions);
+
+  rangeSlider.noUiSlider.on('update', function () {
+    setPaymentAmount();
+    setLoanAmount();
+  });
+  for (var i = 0; i < repaymentEls.length; i++) {
+    repaymentEls[i].addEventListener('change', function () {
+      setPaymentAmount();
+    });
+  }
+
+})();
+  
+    </script>
+
+
+
+  
+  
+
+ 
+
+</body>
+
+</html>
+ 
